@@ -17,7 +17,7 @@ func New(learningRate, breakVal float64) *GradientDescent {
 }
 
 func (gd *GradientDescent) GradientDescent(points [][]float64) (float64, float64) {
-	est := generateEst(points, 0, 0, len(points))
+	est := generateEst(points, 0, 0)
 	w, b := 0.0, 0.0
 	dw, db := math.MaxFloat64, math.MaxFloat64
 	for {
@@ -25,11 +25,11 @@ func (gd *GradientDescent) GradientDescent(points [][]float64) (float64, float64
 		if math.Abs(dw) < gd.breakVal && math.Abs(db) < gd.breakVal {
 			return w, b
 		}
-		est = generateEst(points, w, b, len(points))
+		est = generateEst(points, w, b)
 	}
 }
 
-func generateEst(points [][]float64, w, b float64, m int) [][]float64 {
+func generateEst(points [][]float64, w, b float64) [][]float64 {
 	var est [][]float64
 	for _, point := range points {
 		x := point[0]
